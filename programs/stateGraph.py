@@ -12,7 +12,7 @@ class Data():
         self.dates = []
         for i in range(1, 31):
             self.dates.append(i)
-        self.path = os.path.join("E:/Projects/COVID-19_Data_Modeling/finished/", self.date)
+        self.path = os.path.join("/path/to/finished/", self.date)
         self.import_clean_data()
         self.import_change_data()
 
@@ -91,22 +91,3 @@ class Graph():
             else:
                 plt.savefig(self.clean_or_change + "_" + trend_or_raw + ".png",bbox_inches='tight', pad_inches=0.75, dpi=300)
             plt.close()
-
-# state_name = str(input("Which state would you like to graph?: "))
-# date = str(input("From what date do you want to graph? [Input Form: Month-Day-2X]: "))
-# clean_scale = float(input("What should the clean data scale be?: "))
-# change_scale = float(input("What should the change data scale be?: "))
-
-# # Get the data from a specified date
-# data = Data(date)
-
-# # Create a state folder
-# os.makedirs(os.path.join(data.path, state_name))
-# state_folder = os.path.join(data.path, state_name)
-
-# # Create the graphs
-# os.chdir(state_folder)
-# cleanRaw = Graph(data, "clean", "raw", "Raw Growth Data", clean_scale, 3)
-# cleanTrend = Graph(data, "clean", "trend", "Trend line of Growth Data", clean_scale, 3)
-# changeRaw = Graph(data, "change", "raw", "Raw Data of Daily Patient Change", change_scale)
-# changeTrend = Graph(data, "change", "trend", "Trend line of Daily Patient Change", change_scale)
