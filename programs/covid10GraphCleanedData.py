@@ -6,14 +6,14 @@ import csv
 import webbrowser
 from time import sleep
 
-os.chdir("E:\Projects\COVID-19_Data_Modeling\working\programs")
+os.chdir("\path\to\working\programs")
 
 # Create a data class to take in a csv file and do things with that data
 class Data:
     def __init__(self, csv, date):
         self.csv = csv
         self.date = date
-        self.path = os.path.join("E:\Projects\COVID-19_Data_Modeling\working\COVID-19-master_" + self.date + "\csse_covid_19_data\csse_covid_19_time_series", self.csv)
+        self.path = os.path.join("\path\to\working\COVID-19-master_" + self.date + "\csse_covid_19_data\csse_covid_19_time_series", self.csv)
 
     def organize_data(self):
         states_and_data = []
@@ -53,13 +53,13 @@ xy = data.organize_data()
 
 dates = xy[0] # x-axis labels
 date = str(dates[-1]).replace('/', '-') # current date
-path = os.path.join("E:/Projects/COVID-19_Data_Modeling/finished/" + date)
+path = os.path.join("path/to/finished/" + date)
 os.makedirs(path)
 
 dates = dates[-30:] # last 30 days
 
 def outputCsv():
-    with open('E:/Projects/COVID-19_Data_Modeling/finished/' + date + '/clean_COVID-19_data_' + date + '.csv', mode='w', newline='') as cleaned:
+    with open('path/to/finished/' + date + '/clean_COVID-19_data_' + date + '.csv', mode='w', newline='') as cleaned:
         csv_writer = csv.writer(cleaned)
         for i in range(len(xy[1])):
             row = [xy[1][i][0]] # name of state
@@ -67,7 +67,7 @@ def outputCsv():
                 row.append(xy[1][i][1][j])
             csv_writer.writerow(row)
     print("Saved CSV file as clean_COVID-19_data_" + date + ".csv")
-    with open('E:/Projects/COVID-19_Data_Modeling/finished/' + date + '/daily_change_COVID-19_data_' + date + '.csv', mode='w', newline='') as change:
+    with open('path/to/finished/' + date + '/daily_change_COVID-19_data_' + date + '.csv', mode='w', newline='') as change:
         csv_writer = csv.writer(change)
         for i in range(len(xy[1])):
             row = [xy[1][i][0]] # name of state
@@ -138,7 +138,7 @@ plt.rc('font', size=8)
 for i in range(3):
     plt.text(dates[-1], highestList[i][1][-1], highestList[i][0], horizontalalignment="right")
 # plt.show()
-plt.savefig("E:/Projects/COVID-19_Data_Modeling/finished/" + date + "/COVID-19_Top_10_" + date + ".png",bbox_inches='tight', pad_inches=0.75, dpi=300)
+plt.savefig("path/to/finished/" + date + "/COVID-19_Top_10_" + date + ".png",bbox_inches='tight', pad_inches=0.75, dpi=300)
 print("Saved graph as COVID-19_Top_10_" + date + ".png")
 plt.close()
 
@@ -166,13 +166,13 @@ plt.rc('font', size=8)
 for i in range(3):
     plt.text(Xs[-1], highestList[i][1][-1], highestList[i][0], horizontalalignment="right")
 # plt.show()
-plt.savefig("E:/Projects/COVID-19_Data_Modeling/finished/" + date + "/TRENDLINE_COVID-19_Top_10_" + date + ".png",bbox_inches='tight', pad_inches=0.75, dpi=300)
+plt.savefig("path/to/finished/" + date + "/TRENDLINE_COVID-19_Top_10_" + date + ".png",bbox_inches='tight', pad_inches=0.75, dpi=300)
 print("Saved graph as TRENDLINE_COVID-19_Top_10_" + date + ".png")
 plt.close()
 
 # Plot Changes Trendline
 changes = []
-with open('E:/Projects/COVID-19_Data_Modeling/finished/' + date + '/daily_change_COVID-19_data_' + date + '.csv', 'r', newline='') as file:
+with open('path/to/finished/' + date + '/daily_change_COVID-19_data_' + date + '.csv', 'r', newline='') as file:
     reader = csv.reader(file)
     for line in reader:
         changes.append(line)
@@ -215,7 +215,7 @@ plt.rc('font', size=8)
 for i in range(3):
     plt.text(xs[-1], float(highestChange[i][-1]) / scale, highestChange[i][0], horizontalalignment="right")
 # plt.show()
-plt.savefig("E:/Projects/COVID-19_Data_Modeling/finished/" + date + "/TRENDLINE_COVID-19_Top_10_Count_Changes_Day-to-Day_" + date + ".png", bbox_inches='tight', pad_inches=0.75, dpi=300)
+plt.savefig("path/to/finished/" + date + "/TRENDLINE_COVID-19_Top_10_Count_Changes_Day-to-Day_" + date + ".png", bbox_inches='tight', pad_inches=0.75, dpi=300)
 print("Saved graph as TRENDLINE_COVID-19_Top_10_Count_Changes_Day-to-Day_" + date + ".png")
 plt.close()
 
@@ -244,12 +244,8 @@ plt.rc('font', size=8)
 for i in range(3):
     plt.text(xs[-1], float(highestChange[i][-1]) / scale, highestChange[i][0], horizontalalignment="right")
 # plt.show()
-plt.savefig("E:/Projects/COVID-19_Data_Modeling/finished/" + date + "/COVID-19_Top_10_Count_Changes_Day-to-Day_" + date + ".png", bbox_inches='tight', pad_inches=0.75, dpi=300)
+plt.savefig("path/to/finished/" + date + "/COVID-19_Top_10_Count_Changes_Day-to-Day_" + date + ".png", bbox_inches='tight', pad_inches=0.75, dpi=300)
 print("Saved graph as COVID-19_Top_10_Count_Changes_Day-to-Day_" + date + ".png")
 plt.close()
-
-
-webbrowser.open("https://docs.google.com/spreadsheets/d/1qPrc0bip3NbSMB_U3NZ2re_3t59oMOdrqsbTByApk3w/edit#gid=2145933813") # daily_change_COVID-19_data
-webbrowser.open("https://docs.google.com/spreadsheets/d/1v33wqc3dM4zUbyIVDKVsMb-jcujsV0c7PswpIP3WzXk/edit#gid=1706192871") # clean_COVID-19_data
 
 sleep(10000)
